@@ -42,13 +42,4 @@ class MovieListActivity : AppCompatActivity() {
         startActivityForResult(intent, REQUEST_CODE)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val movie = Movie(adapter.movies.size+1L, data!!.getStringExtra("movieName"))
-            viewModel.insert(movie)
-        }
-    }
-
-
 }

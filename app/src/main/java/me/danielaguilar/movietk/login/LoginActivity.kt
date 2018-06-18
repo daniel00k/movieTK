@@ -1,4 +1,4 @@
-package me.danielaguilar.movietk
+package me.danielaguilar.movietk.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_login.*
+import me.danielaguilar.movietk.R
 import me.danielaguilar.movietk.movie_list.MovieListActivity
 
 /**

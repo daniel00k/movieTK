@@ -3,6 +3,7 @@ package me.danielaguilar.movietk.data
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import io.reactivex.Completable
 
 
 class MovieViewModel(application: Application) : AndroidViewModel(application) {
@@ -15,7 +16,8 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         allMovies = mRepository.allMovies
     }
 
-    fun insert(movie: Movie) {
-        mRepository.insert(movie)
+    fun insert(movie: Movie):Completable {
+        return mRepository.insert(movie)
     }
+
 }

@@ -18,11 +18,11 @@ class MovieRepository(context: Context) {
     }
 
 
-    fun insert(movie: Movie) {
+    fun insert(movie: Movie): Completable {
 
-        Completable.fromAction { movieDao.insert(movie) }
+        return Completable.fromAction { movieDao.insert(movie) }
                 .subscribeOn(Schedulers.io())
-                .subscribe()
+
 
     }
 }

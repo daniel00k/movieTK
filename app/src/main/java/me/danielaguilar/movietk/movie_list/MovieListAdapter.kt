@@ -32,7 +32,7 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>(
 
         fun bind(position: Int) {
             val movieTitle: TextView = view.findViewById(R.id.movie_title)
-            movieTitle.text = movies[position].name
+            movieTitle.text = "id: ${movies[position].id},name: ${movies[position].name}"
         }
 
     }

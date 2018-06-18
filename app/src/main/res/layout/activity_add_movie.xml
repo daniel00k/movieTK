@@ -10,7 +10,34 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:inputType="textAutoComplete"
+        android:hint="name"
         android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/movieDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="description"
+        android:fontFamily="sans-serif-light"
+        android:inputType="textAutoComplete"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_launcher_background"
+        android:id="@+id/moviePosterUrl"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/ic_launcher"
+        android:id="@+id/moviePictureUrl" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/clickMe"
+        android:text="Photo"/>
 
     <Button
         android:id="@+id/saveMovie"
