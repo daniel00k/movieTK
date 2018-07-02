@@ -1,31 +1,30 @@
 package me.danielaguilar.movietk.movie_list
 
-import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.activity_movie_list.*
 import me.danielaguilar.movietk.R
 import me.danielaguilar.movietk.add_movie.AddMovieActivity
 import me.danielaguilar.movietk.data.Movie
 import me.danielaguilar.movietk.data.MovieViewModel
+import me.danielaguilar.movietk.show_movie.ShowMovieActivity
 
 
-class MovieListActivity : AppCompatActivity() {
-    companion object {
-        const val REQUEST_CODE = 1
-    }
-    private val adapter = MovieListAdapter()
+class MovieListActivity : AppCompatActivity(), MovieListAdapter.MovieItemListener {
+
+    private val adapter = MovieListAdapter(this)
+    private val SPAN_COUNT = 3
 
     lateinit var viewModel: MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_list)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(SPAN_COUNT, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.adapter = adapter
         viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
@@ -39,7 +38,13 @@ class MovieListActivity : AppCompatActivity() {
 
     private fun addMovie(){
         val intent = Intent(this, AddMovieActivity::class.java)
-        startActivityForResult(intent, REQUEST_CODE)
+        startActivity(intent)
+    }
+
+    override fun onMovieSelected(movie: Movie) {
+        val intent = Intent(this, ShowMovieActivity::class.java)
+        intent.putExtra("movie", movie)
+        startActivity(intent)
     }
 
 }

@@ -13,4 +13,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="search_hint">buscar nombre</string>
+    <string name="movie_portrait">Movie Portrait</string>
+    <string name="movie_cover">Movie Cover</string>
 </resources>

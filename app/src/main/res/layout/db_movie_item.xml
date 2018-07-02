@@ -7,29 +7,21 @@
 
     <ImageView
         android:id="@+id/moviePortrait"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:src="@mipmap/ic_launcher"
-        android:elevation="2dp"
-        android:translationZ="2dp"
-        android:background="@drawable/rounder_corner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/movie_portrait" />
 
     <TextView
-        android:id="@+id/movie_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/movieTitle"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moviePortrait"
-        tools:text="example name asdas asd sad sad asd asd asd asd asd asd as das das da s" />
-
-
+        app:layout_constraintStart_toEndOf="@+id/moviePortrait"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="sadasdsa" />
 </android.support.constraint.ConstraintLayout>

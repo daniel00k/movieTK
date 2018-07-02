@@ -2,6 +2,7 @@ package me.danielaguilar.movietk.data
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
+import io.reactivex.Flowable
 
 @Dao
 interface MovieDao {
@@ -14,6 +15,12 @@ interface MovieDao {
 
     @Query("SELECT * FROM movies")
     fun findAll(): LiveData<List<Movie>>
+
+    //@Query("SELECT * FROM movies WHERE name LIKE '%:name%'")
+    //fun findAllByName(name: String): LiveData<List<Movie>>
+
+    @Query("SELECT * FROM movies WHERE movies.name LIKE '%' || :name || '%' ")
+    fun findAllByName(name: String): Flowable<List<Movie>>
 
     @Query("SELECT * FROM movies WHERE movies.id= :id LIMIT 1")
     fun findById(id: Long): Movie

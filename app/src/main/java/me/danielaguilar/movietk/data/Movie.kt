@@ -47,5 +47,9 @@ class Movie(@NonNull val name:String,
             return arrayOfNulls(size)
         }
     }
+
+    override fun toString(): String {
+        return name
+    }
 }
 

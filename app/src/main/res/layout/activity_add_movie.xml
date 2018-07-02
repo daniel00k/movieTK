@@ -1,49 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/movieName"
+    <android.support.v7.widget.SearchView
+        android:id="@+id/movieSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:inputType="textAutoComplete"
-        android:hint="name"
         android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/movieDescription"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="description"
-        android:fontFamily="sans-serif-light"
-        android:inputType="textAutoComplete"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/ic_launcher_background"
-        android:id="@+id/moviePosterUrl"/>
+                <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/formContainer">
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@mipmap/ic_launcher"
-        android:id="@+id/moviePictureUrl" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/clickMe"
-        android:text="Photo"/>
+                    <ImageView
+                        android:id="@+id/coverPicture"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_launcher_background"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/movie_cover" />
 
-    <Button
-        android:id="@+id/saveMovie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="save"/>
+                    <ImageView
+                        android:id="@+id/moviePosterUrl"
+                        android:layout_width="80dp"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="108dp"
+                        android:src="@mipmap/ic_launcher"
+                        android:scaleType="fitXY"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/movie_portrait" />
 
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/moviePosterUrl"
+                        app:layout_constraintTop_toBottomOf="@+id/coverPicture">
+
+                        <EditText
+                            android:id="@+id/movieName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:ellipsize="end"
+                            android:fontFamily="sans-serif-light"
+                            android:hint="name"
+                            android:textSize="18sp"
+                            android:inputType="text" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/moviePosterUrl">
+
+                        <EditText
+                            android:id="@+id/movieDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-light"
+                            android:hint="description"
+                            android:textSize="18sp"
+                            tools:text="description"
+                            android:inputType="text" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recyclerView" />
+
+            </FrameLayout>
+
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="240dp"
+                android:id="@+id/moviePictureUrl" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/clickMe"
+                android:text="Photo"/>
+
+            <Button
+                android:id="@+id/saveMovie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="save"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
