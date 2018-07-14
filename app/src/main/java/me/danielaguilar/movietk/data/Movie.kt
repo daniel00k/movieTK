@@ -11,12 +11,14 @@ import android.support.annotation.NonNull
 class Movie(@NonNull val name:String,
             val description: String,
             @ColumnInfo(name="poster_url")      val posterUrl: String,
+            @ColumnInfo(name="cover_url")      val coverUrl: String,
             @ColumnInfo(name="picture_url")     val pictureUrl: String):Parcelable {
 
     @PrimaryKey(autoGenerate = true) var id: Long = 0
     @ColumnInfo(name="location_url") var locationUrl: String = ""
 
     constructor(parcel: Parcel) : this(
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -29,6 +31,7 @@ class Movie(@NonNull val name:String,
         parcel.writeString(name)
         parcel.writeString(description)
         parcel.writeString(posterUrl)
+        parcel.writeString(coverUrl)
         parcel.writeString(pictureUrl)
         parcel.writeLong(id)
         parcel.writeString(locationUrl)

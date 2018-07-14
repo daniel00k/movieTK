@@ -8,13 +8,13 @@ data class DBMovie (@SerializedName("vote_count") val voteCount: Int?,
                     @SerializedName("vote_average") val voteAverage: Float?,
                     val title: String?,
                     val popularity: Double?,
-                    @SerializedName("poster_path") val posterPath: Any?,
+                    @SerializedName("poster_path") val posterPath: String?,
                     @SerializedName("original_language")
                     val originalLanguage: String?,
                     @SerializedName("original_title") val originalTitle: String?,
                     @SerializedName("genre_ids") val genreIds: List<Int>?,
                     @SerializedName("backdrop_path")
-                    val backdropPath: Any?,
+                    val backdropPath: String?,
                     val adult: Boolean?,
                     val overview: String?,
                     @SerializedName("release_date") val releaseDate: String?)

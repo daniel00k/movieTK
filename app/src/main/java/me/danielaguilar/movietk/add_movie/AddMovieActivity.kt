@@ -24,7 +24,9 @@ import me.danielaguilar.movietk.movie_list.DBMovieListAdapter
 
 
 class AddMovieActivity : AppCompatActivity(), DBMovieListAdapter.DBMovieItemListener {
+    private lateinit var currentMovie: DBMovie
     override fun onDBMovieSelected(movie: DBMovie) {
+        currentMovie = movie
         movieDescription.setText(movie.overview, TextView.BufferType.EDITABLE)
         movieName.setText(movie.title, TextView.BufferType.EDITABLE)
         Glide.with(this).load(IMAGES_BASE_URL +movie.posterPath).into(moviePosterUrl)
@@ -84,9 +86,10 @@ class AddMovieActivity : AppCompatActivity(), DBMovieListAdapter.DBMovieItemList
         }
         saveMovie.setOnClickListener {
 
-            val movie  = Movie(movieSearch.query.toString(),
+            val movie  = Movie(movieName.text.toString(),
                     movieDescription.text.toString(),
-                    "https://cdn.shopify.com/s/files/1/0151/0741/products/pg1012_1024x1024.jpg",
+                    IMAGES_BASE_URL+currentMovie.posterPath!!,
+                    IMAGES_BASE_URL+currentMovie.backdropPath!!,
                     "http://as01.epimg.net/betech/imagenes/2016/08/16/portada/1471354374_257181_1471354514_noticia_normal.jpg")
 
             viewModel.insert(movie).subscribe(
