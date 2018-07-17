@@ -1,7 +1,6 @@
 package me.danielaguilar.movietk.add_movie
 
 import android.app.Activity
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -16,15 +15,19 @@ import kotlinx.android.synthetic.main.activity_add_movie.*
 import me.danielaguilar.movietk.R
 import me.danielaguilar.movietk.camera.DeviceCamera
 import me.danielaguilar.movietk.config.IMAGES_BASE_URL
+import me.danielaguilar.movietk.dagger.ActivityModule
+import me.danielaguilar.movietk.dagger.DaggerActivityComponent
 import me.danielaguilar.movietk.data.DBMovie
 import me.danielaguilar.movietk.data.Movie
 import me.danielaguilar.movietk.data.MovieServiceCallbacks
 import me.danielaguilar.movietk.data.MovieViewModel
 import me.danielaguilar.movietk.movie_list.DBMovieListAdapter
+import javax.inject.Inject
 
 
 class AddMovieActivity : AppCompatActivity(), DBMovieListAdapter.DBMovieItemListener {
     private lateinit var currentMovie: DBMovie
+
     override fun onDBMovieSelected(movie: DBMovie) {
         currentMovie = movie
         movieDescription.setText(movie.overview, TextView.BufferType.EDITABLE)
@@ -39,14 +42,17 @@ class AddMovieActivity : AppCompatActivity(), DBMovieListAdapter.DBMovieItemList
     }
 
     private lateinit var imageFilePath: String
-    private lateinit var viewModel: MovieViewModel
+    @Inject lateinit var viewModel: MovieViewModel
     private val adapter = DBMovieListAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_movie)
-        viewModel   = ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
+        DaggerActivityComponent.builder()
+                .activityModule(ActivityModule(this))
+                .build()
+                .inject(this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
         movieSearch.queryHint = "buscar"

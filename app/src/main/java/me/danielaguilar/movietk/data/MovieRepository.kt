@@ -6,17 +6,23 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import me.danielaguilar.movietk.dagger.DaggerMovieRepositoryComponent
+import me.danielaguilar.movietk.dagger.MovieRepositoryModule
+import javax.inject.Inject
 
 
 class MovieRepository(context: Context) {
 
-    private val movieDao: MovieDao
+    @Inject lateinit var movieDao: MovieDao
     val allMovies: LiveData<List<Movie>>
 
     init {
         val db = FactoryDAO.getDatabase(context)
-        movieDao = db.movieDao()
-        allMovies = movieDao.findAll()
+        DaggerMovieRepositoryComponent.builder()
+                .movieRepositoryModule(MovieRepositoryModule(db))
+                .build()
+                .inject(this)
+        allMovies = /*MutableLiveData<List<Movie>>()*/ movieDao.findAll()
     }
 
     fun selectedMovies(name: String) : Flowable<List<Movie>> = movieDao.findAllByName(name).subscribeOn(Schedulers.io())

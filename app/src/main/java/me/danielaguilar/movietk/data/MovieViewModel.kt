@@ -5,15 +5,19 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import me.danielaguilar.movietk.dagger.DaggerViewModelComponent
+import me.danielaguilar.movietk.dagger.ViewModelModule
+import javax.inject.Inject
 
 
 class MovieViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val mRepository: MovieRepository = MovieRepository(application)
+    @Inject lateinit var mRepository: MovieRepository
 
     val allMovies: LiveData<List<Movie>>
 
     init {
+        DaggerViewModelComponent.builder().viewModelModule(ViewModelModule(application)).build().inject(this)
         allMovies = mRepository.allMovies
 
     }

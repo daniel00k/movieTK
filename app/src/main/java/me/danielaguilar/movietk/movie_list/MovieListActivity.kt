@@ -1,7 +1,6 @@
 package me.danielaguilar.movietk.movie_list
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,24 +8,29 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.activity_movie_list.*
 import me.danielaguilar.movietk.R
 import me.danielaguilar.movietk.add_movie.AddMovieActivity
+import me.danielaguilar.movietk.dagger.ActivityModule
+import me.danielaguilar.movietk.dagger.DaggerActivityComponent
 import me.danielaguilar.movietk.data.Movie
 import me.danielaguilar.movietk.data.MovieViewModel
 import me.danielaguilar.movietk.show_movie.ShowMovieActivity
+import javax.inject.Inject
 
 
 class MovieListActivity : AppCompatActivity(), MovieListAdapter.MovieItemListener {
 
-    private val adapter = MovieListAdapter(this)
     private val SPAN_COUNT = 3
-
-    lateinit var viewModel: MovieViewModel
+    @Inject lateinit var adapter:MovieListAdapter
+    @Inject lateinit var viewModel: MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_list)
+        DaggerActivityComponent.builder()
+                .activityModule(ActivityModule(this))
+                .build()
+                .inject(this)
         recyclerView.layoutManager = StaggeredGridLayoutManager(SPAN_COUNT, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.adapter = adapter
-        viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
         viewModel.allMovies.observe(this, Observer<List<Movie>> { movies ->
             // Update the cached copy of the movies in the adapter.

@@ -19,6 +19,6 @@ class ShowMovieActivity : AppCompatActivity() {
         movieName.text          = movie.name
         movieDescription.text   = movie.description
         Glide.with(this).load(movie.posterUrl).into(moviePicture)
-        Glide.with(this).load(movie.pictureUrl).into(coverPicture)
+        Glide.with(this).load(movie.coverUrl).into(coverPicture)
     }
 }
