@@ -22,7 +22,7 @@ class MovieRepository(context: Context) {
                 .movieRepositoryModule(MovieRepositoryModule(db))
                 .build()
                 .inject(this)
-        allMovies = /*MutableLiveData<List<Movie>>()*/ movieDao.findAll()
+        allMovies = movieDao.findAll()
     }
 
     fun selectedMovies(name: String) : Flowable<List<Movie>> = movieDao.findAllByName(name).subscribeOn(Schedulers.io())

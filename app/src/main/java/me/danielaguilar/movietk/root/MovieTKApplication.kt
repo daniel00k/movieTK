@@ -1,12 +1,15 @@
 package me.danielaguilar.movietk.root
 
 import android.app.Application
-import me.danielaguilar.movietk.dagger.AppComponent
-import me.danielaguilar.movietk.dagger.AppModule
-import me.danielaguilar.movietk.dagger.DaggerAppComponent
+import me.danielaguilar.movietk.dagger.*
 
 class MovieTKApplication : Application() {
     lateinit var component: AppComponent
+    companion object {
+        lateinit var netWorkComponent: NetworkComponent
+    }
+
+
     override fun onCreate() {
         super.onCreate()
         initDagger(this)
@@ -16,5 +19,10 @@ class MovieTKApplication : Application() {
         component = DaggerAppComponent.builder()
                 .appModule(AppModule(context))
                 .build()
+        netWorkComponent = DaggerNetworkComponent.builder()
+                        .networkModule(NetworkModule())
+                        .build()
+
+
     }
 }

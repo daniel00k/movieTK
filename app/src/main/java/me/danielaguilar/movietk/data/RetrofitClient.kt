@@ -1,7 +1,6 @@
 package me.danielaguilar.movietk.data
 
-import me.danielaguilar.movietk.dagger.DaggerNetworkComponent
-import me.danielaguilar.movietk.dagger.NetworkModule
+import me.danielaguilar.movietk.root.MovieTKApplication
 import javax.inject.Inject
 
 /**
@@ -12,10 +11,7 @@ class RetrofitClient {
     @Inject lateinit var apiService: ApiService
 
     fun getRetrofit(): ApiService{
-        DaggerNetworkComponent.builder()
-                .networkModule(NetworkModule())
-                .build()
-                .inject(this)
+        MovieTKApplication.netWorkComponent.inject(this)
         return apiService
 
     }
